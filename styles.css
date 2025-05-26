@@ -1,0 +1,30 @@
+.youtube-focus-mode #secondary,
+.youtube-focus-mode #related,
+.youtube-focus-mode #comments,
+.youtube-focus-mode #masthead-container,
+.youtube-focus-mode #below,
+.youtube-focus-mode ytd-watch-metadata {
+  display: none !important;
+}
+
+.youtube-focus-mode #primary {
+  max-width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.youtube-focus-mode #player-container-outer {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  background: black !important;
+  z-index: 9998 !important;
+}
+
+.youtube-focus-mode #player-container,
+.youtube-focus-mode #player,
+.youtube-focus-mode .html5-video-container {
+  width: 100% !important;
+  height: 100% !important;
+} 
