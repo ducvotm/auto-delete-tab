@@ -1,30 +1,217 @@
+/* YouTube Focus Mode - Fullscreen Video Only */
+
+/* Hide EVERYTHING except the video player when focus mode is active */
+.youtube-focus-mode #masthead-container,
 .youtube-focus-mode #secondary,
 .youtube-focus-mode #related,
 .youtube-focus-mode #comments,
-.youtube-focus-mode #masthead-container,
 .youtube-focus-mode #below,
-.youtube-focus-mode ytd-watch-metadata {
+.youtube-focus-mode ytd-watch-metadata,
+.youtube-focus-mode [role="complementary"],
+.youtube-focus-mode #chat,
+.youtube-focus-mode ytd-live-chat-frame,
+.youtube-focus-mode #merch-shelf,
+.youtube-focus-mode ytd-merch-shelf-renderer,
+.youtube-focus-mode #sponsor-button,
+.youtube-focus-mode ytd-video-secondary-info-renderer,
+.youtube-focus-mode #info-contents,
+.youtube-focus-mode #meta-contents,
+.youtube-focus-mode ytd-comments,
+.youtube-focus-mode #comments-section,
+.youtube-focus-mode ytd-item-section-renderer[target-id="comments-section"],
+.youtube-focus-mode #primary-inner,
+.youtube-focus-mode #columns,
+.youtube-focus-mode ytd-watch-flexy[flexy] #primary.ytd-watch-flexy,
+.youtube-focus-mode #info,
+.youtube-focus-mode #meta,
+.youtube-focus-mode ytd-video-primary-info-renderer,
+.youtube-focus-mode ytd-video-secondary-info-renderer,
+.youtube-focus-mode #description,
+.youtube-focus-mode ytd-expander,
+.youtube-focus-mode #owner,
+.youtube-focus-mode #subscribe-button,
+.youtube-focus-mode #notification-preference-button {
   display: none !important;
+  visibility: hidden !important;
 }
 
-.youtube-focus-mode #primary {
-  max-width: 100% !important;
-  margin: 0 auto !important;
-}
-
-.youtube-focus-mode #player-container-outer {
+/* Make the video player fullscreen */
+.youtube-focus-mode #player-theater-container,
+.youtube-focus-mode #player-container-outer,
+.youtube-focus-mode #movie_player {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
-  width: 100% !important;
+  width: 100vw !important;
   height: 100vh !important;
   background: black !important;
   z-index: 9998 !important;
+  will-change: transform !important;
+  display: block !important;
+  visibility: visible !important;
 }
 
 .youtube-focus-mode #player-container,
 .youtube-focus-mode #player,
-.youtube-focus-mode .html5-video-container {
+.youtube-focus-mode .html5-video-container,
+.youtube-focus-mode .video-stream {
   width: 100% !important;
   height: 100% !important;
+  position: relative !important;
+  top: 0 !important;
+  left: 0 !important;
+  will-change: transform !important;
+}
+
+/* Hide the page background and ensure black background */
+.youtube-focus-mode #page-manager,
+.youtube-focus-mode #content,
+.youtube-focus-mode ytd-watch-flexy {
+  background: black !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Hide video controls by default for distraction-free experience */
+.youtube-focus-mode .ytp-chrome-bottom,
+.youtube-focus-mode .ytp-chrome-top,
+.youtube-focus-mode .ytp-progress-bar-container,
+.youtube-focus-mode .ytp-gradient-bottom,
+.youtube-focus-mode .ytp-gradient-top {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  pointer-events: none !important;
+}
+
+/* Show controls when hovering over video player */
+.youtube-focus-mode #movie_player:hover .ytp-chrome-bottom,
+.youtube-focus-mode #movie_player:hover .ytp-chrome-top,
+.youtube-focus-mode #movie_player:hover .ytp-progress-bar-container,
+.youtube-focus-mode #movie_player:hover .ytp-gradient-bottom,
+.youtube-focus-mode #movie_player:hover .ytp-gradient-top {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Always hide distracting elements */
+.youtube-focus-mode .ytp-cards-teaser,
+.youtube-focus-mode .ytp-ce-element,
+.youtube-focus-mode .ytp-watermark,
+.youtube-focus-mode .ytp-paid-content-overlay,
+.youtube-focus-mode .ytp-suggested-action,
+.youtube-focus-mode .ytp-videowall-still,
+.youtube-focus-mode .ytp-endscreen-element {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide any popup overlays or notifications */
+.youtube-focus-mode .ytp-popup,
+.youtube-focus-mode .ytp-contextmenu,
+.youtube-focus-mode .ytp-tooltip {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Ensure focus button stays visible and accessible */
+.youtube-focus-mode #youtube-focus-button {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 999999 !important;
+  opacity: 0.9 !important;
+}
+
+/* Focus button styling with performance optimizations */
+#youtube-focus-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+  padding: 10px 20px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  user-select: none;
+  transition: all 0.2s ease-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  will-change: transform, background-color;
+  transform: translateZ(0); /* Force hardware acceleration */
+  -webkit-transform: translateZ(0);
+}
+
+#youtube-focus-button:hover {
+  background-color: #cc0000;
+  transform: scale(1.05) translateZ(0);
+  -webkit-transform: scale(1.05) translateZ(0);
+}
+
+#youtube-focus-button:active {
+  transform: scale(0.95) translateZ(0);
+  -webkit-transform: scale(0.95) translateZ(0);
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+  #youtube-focus-button {
+    bottom: 10px !important;
+    right: 10px !important;
+    padding: 8px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #youtube-focus-button {
+    bottom: 5px !important;
+    right: 5px !important;
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  #youtube-focus-button {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+}
+
+/* Performance optimization: Reduce repaints - but exclude video elements */
+.youtube-focus-mode *:not(#player):not(#player-container):not(.html5-video-container):not(.video-stream):not(.ytp-chrome-bottom):not(.ytp-chrome-top):not(.ytp-progress-bar-container) {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* Ensure video player elements are always visible and functional */
+.youtube-focus-mode #player-container,
+.youtube-focus-mode #player,
+.youtube-focus-mode .html5-video-container,
+.youtube-focus-mode .video-stream,
+.youtube-focus-mode video {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+/* Make sure the main video container is visible */
+.youtube-focus-mode #movie_player {
+  display: block !important;
+  visibility: visible !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: relative !important;
 } 

@@ -1,23 +1,40 @@
 {
   "manifest_version": 3,
   "name": "YouTube Focus Mode",
-  "version": "1.0",
-  "description": "A Chrome extension to help you focus on YouTube videos by hiding distractions",
+  "version": "1.1.0",
+  "description": "A Chrome extension to help you focus on YouTube videos by hiding distractions and providing a clean viewing experience",
+  "author": "YouTube Focus Mode Team",
   "permissions": [
-    "storage",
-    "activeTab"
+    "storage"
   ],
-  "action": {
-    "default_popup": "popup.html"
-  },
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.youtu.be/*",
+    "*://m.youtube.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtu.be/*",
+        "*://m.youtube.com/*"
+      ],
       "js": ["contentScript.js"],
-      "css": ["styles.css"]
+      "css": ["styles.css"],
+      "run_at": "document_end"
     }
   ],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["styles.css"],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtu.be/*",
+        "*://m.youtube.com/*"
+      ]
+    }
+  ]
 } 
